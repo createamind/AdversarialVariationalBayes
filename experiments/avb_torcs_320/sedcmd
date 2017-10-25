@@ -1,0 +1,3 @@
+ 2014  sed  "/^.........[49]/d" all.lst  > train.lst                  
+ 2015  sed -n   "/^.........9/p" all.lst  > val.lst    
+ 2016  sed -n   "/^.........4/p" all.lst  > test.lst  

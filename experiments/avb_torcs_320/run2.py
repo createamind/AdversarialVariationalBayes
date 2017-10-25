@@ -35,10 +35,10 @@ args = [
 "--learning-rate", "1e-5",
 "--learning-rate-adversary", "1e-4",
 '--batch-size', '64',
-'--log-dir', os.path.join(outdir, 'logs'),
-'--sample-dir', os.path.join(outdir, 'samples'),
+'--log-dir', os.path.join(outdir, 'logs2'),
+'--sample-dir', os.path.join(outdir, 'samples2'),
 # Data set
-'--dataset', 'torcs',
+'--dataset', 'torcs2',
 '--data-dir', 'datasets',
 '--split-dir', 'datasets/splits',
 # Test
