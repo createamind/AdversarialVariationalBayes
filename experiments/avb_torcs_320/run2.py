@@ -22,7 +22,7 @@ args = [
 '--z-dim', '64',
 '--z-dist', 'gauss',
 '--cond-dist', 'gauss',
-'--eps-dim', '128',
+'--eps-dim', '0',
 '--eps-nbasis', '32',
 '--encoder', 'conv2',
 '--decoder', 'conv2',
