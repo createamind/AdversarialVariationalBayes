@@ -60,6 +60,9 @@ def train(encoder, decoder, adversary, x_train, x_val, config):
         tf.summary.scalar('val/reconstr_err', avb_val.reconst_err_mean),
     ])
 
+    configmem = tf.ConfigProto()
+    configmem.gpu_options.allow_growth = True
+
     # Supervisor
     sv = tf.train.Supervisor(
         logdir=config['log_dir'], global_step=global_step,
@@ -69,7 +72,7 @@ def train(encoder, decoder, adversary, x_train, x_val, config):
     # Test samples
     z_test_np = np.random.randn(batch_size, z_dim)
     # Session
-    with sv.managed_session() as sess:
+    with sv.managed_session(config=configmem) as sess:
         # Show real data
         samples0 = sess.run(x_val)
         save_images(samples0[:64], [8, 8], config['sample_dir'], 'real.png')
