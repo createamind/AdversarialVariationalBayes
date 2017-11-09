@@ -2,7 +2,7 @@ import tensorflow as tf
 import numpy as np
 from avb.decoders import (
     full0,
-    conv0, conv1, conv2, conv3,
+    conv0, conv1, conv2, conv3,util
 )
 
 decoder_dict = {
@@ -74,4 +74,24 @@ def get_interpolations(decoder, z1, z2, N, config):
     z_interp = alpha * z1 + (1 - alpha) * z2
     z_interp = tf.reshape(z_interp, [-1, z_dim])
 
+    return decoder(z_interp)
+
+
+def get_interpolations2(decoder, z1, N, config, r , index ):
+    z_dim = config['z_dim']
+    alpha = tf.reshape(tf.linspace(0., 1., N), [1, N, 1])
+
+    z1[index] =  tf.reshape(z1, [-1, 1, z_dim])
+    z1[index] =  tf.reshape(z2, [-1, 1, z_dim])
+
+    z_interp = alpha * z1 + (1 - alpha) * z2
+    z_interp = tf.reshape(z_interp, [-1, z_dim])
+
+    return decoder(z_interp)
+
+
+
+def get_my_int(decoder, z1,  N, config,r = [[-1.,1.]], index=[6] ):
+    z_dim = config['z_dim']
+    z_interp = util.get_interplate_Z(z1,r, index, N, z_dim)
     return decoder(z_interp)
