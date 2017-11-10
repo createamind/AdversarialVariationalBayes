@@ -44,6 +44,7 @@ args = [
 '--test-ais-nchains', '8',
 '--test-ais-eps', '1e-2',
 '--test-is-center-posterior',
+'--beta','3'
 ]
 
 

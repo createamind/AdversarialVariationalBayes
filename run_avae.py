@@ -20,6 +20,7 @@ parser.add_argument("--ntest", default=100, type=int, help="How often to run tes
 parser.add_argument("--batch-size", default=64, type=int, help="The size of batch images.")
 parser.add_argument("--image-size", default=108, type=int, help="The size of image to use (will be center cropped).")
 parser.add_argument("--output-size", default=64, type=int, help="The size of the output images to produce.")
+#parser.add_argument("--output-size", default=128, type=int, help="The size of the output images to produce.")
 
 parser.add_argument("--encoder", default="conv0", type=str, help="Architecture to use.")
 parser.add_argument("--decoder", default="conv0", type=str, help="Architecture to use.")
@@ -52,16 +53,18 @@ parser.add_argument("--test-ais-nchains", default=16, type=int, help="Number of 
 parser.add_argument("--test-ais-nsteps", default=100, type=int, help="Number of annealing steps for ais.")
 parser.add_argument("--test-ais-eps", default=1e-2, type=float, help="Stepsize for AIS.")
 parser.add_argument("--test-is-center-posterior", default=False, action='store_true', help="Wether to center posterior plots.")
-
+parser.add_argument("--beta", default=9, type=float, help="hyper parameter beta")
 
 def main():
     args = parser.parse_args()
     config = vars(args)
     config['gf_dim'] = 64
     config['df_dim'] = 64
+    #config['gf_dim'] = 128
+    #config['df_dim'] = 128
     config['test_is_adaptive_eps'] = False
     pp.pprint(config)
-
+    
     if not os.path.exists(args.log_dir):
         os.makedirs(args.log_dir)
     if not os.path.exists(args.sample_dir):

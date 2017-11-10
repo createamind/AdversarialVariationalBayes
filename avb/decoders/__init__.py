@@ -94,4 +94,4 @@ def get_interpolations2(decoder, z1, N, config, r , index ):
 def get_my_int(decoder, z1,  N, config,r = [[-1.,1.]], index=[6] ):
     z_dim = config['z_dim']
     z_interp = util.get_interplate_Z(z1,r, index, N, z_dim)
-    return decoder(z_interp)
+    return decoder(z_interp),z_interp

@@ -26,7 +26,7 @@ args = [
 '--decoder', 'conv1',
 '--is-01-range',
 # Training
-'--nsteps', '2500000',
+'--nsteps', '2',
 '--ntest', '100',
 "--learning-rate", "1e-4",
 '--batch-size', '64',

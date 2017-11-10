@@ -27,6 +27,8 @@ def train(encoder, decoder, adversary, x_train, x_val, config):
         beta = tf.minimum(tf.cast(global_step, tf.float32) / anneal_steps, 1.)
     else:
         beta = 1
+    if config['beta']:
+        beta = config['beta']
     avb_train = AVB(encoder, decoder, adversary, x_train, z_sampled, config, beta=beta)
     avb_val = AVB(encoder, decoder, adversary, x_val, z_sampled, config, is_training=False)
 

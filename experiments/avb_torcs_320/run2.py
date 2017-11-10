@@ -11,7 +11,7 @@ scriptname = 'run_avae.py'
 cwd = os.path.dirname(os.path.abspath(__file__))
 outdir = cwd
 rootdir = srcdir
-
+index = '3'
 # Arguments
 args = [
 # Architecture
@@ -35,7 +35,7 @@ args = [
 "--learning-rate", "1e-5",
 "--learning-rate-adversary", "1e-4",
 '--batch-size', '64',
-'--log-dir', os.path.join(outdir, 'logs2'),
+'--log-dir', os.path.join(outdir, 'log'+index),
 '--sample-dir', os.path.join(outdir, 'samples2'),
 # Data set
 '--dataset', 'torcs2',
@@ -49,6 +49,7 @@ args = [
 '--test-ais-nchains', '8',
 '--test-ais-eps', '1e-2',
 '--test-is-center-posterior',
+'--beta',index,
 ]
 
 # Set environment variables here

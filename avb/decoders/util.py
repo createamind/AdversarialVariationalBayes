@@ -28,7 +28,7 @@ def get_all_inc(index, zeros, alpah, z_dim):
     return tf.concat(all_inc, axis = 0)
 
 def get_add_result(z,all_inc,index):
-    z[index[0]]=0
+    #z[index[0]]=0
     return z + all_inc
 
 
