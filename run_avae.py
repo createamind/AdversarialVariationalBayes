@@ -15,7 +15,7 @@ parser = argparse.ArgumentParser(description='Train and run a avae.')
 parser.add_argument("--nsteps", default=200000, type=int, help="Iterations to train.")
 parser.add_argument("--learning-rate", default=1e-4, type=float, help="Learning rate of for adam.")
 parser.add_argument("--learning-rate-adversary", default=1e-4, type=float, help="Learning rate of for adam.")
-parser.add_argument("--ntest", default=100, type=int, help="How often to run test code.")
+parser.add_argument("--ntest", default=900, type=int, help="How often to run test code.")
 
 parser.add_argument("--batch-size", default=64, type=int, help="The size of batch images.")
 parser.add_argument("--image-size", default=108, type=int, help="The size of image to use (will be center cropped).")
@@ -53,7 +53,7 @@ parser.add_argument("--test-ais-nchains", default=16, type=int, help="Number of 
 parser.add_argument("--test-ais-nsteps", default=100, type=int, help="Number of annealing steps for ais.")
 parser.add_argument("--test-ais-eps", default=1e-2, type=float, help="Stepsize for AIS.")
 parser.add_argument("--test-is-center-posterior", default=False, action='store_true', help="Wether to center posterior plots.")
-parser.add_argument("--beta", default=9, type=float, help="hyper parameter beta")
+parser.add_argument("--beta", default=199, type=float, help="hyper parameter beta")
 
 def main():
     args = parser.parse_args()

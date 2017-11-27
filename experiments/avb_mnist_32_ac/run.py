@@ -31,7 +31,7 @@ args = [
 '--is-ac',
 # Training
 '--nsteps', '2500000',
-'--ntest', '100',
+'--ntest', '3100',
 "--learning-rate", "5e-5",
 "--learning-rate-adversary", "1e-4",
 '--batch-size', '128',
