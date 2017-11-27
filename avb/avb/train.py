@@ -3,6 +3,8 @@ from avb.decoders import get_reconstr_err, get_decoder_mean, get_interpolations
 from avb.utils import *
 from avb.avb import AVB
 from tqdm import tqdm
+from avb.decoders import  util as myutil
+
 
 def train(encoder, decoder, adversary, x_train, x_val, config):
     batch_size = config['batch_size']
@@ -10,6 +12,13 @@ def train(encoder, decoder, adversary, x_train, x_val, config):
     z_dist = config['z_dist']
     anneal_steps = config['anneal_steps']
     is_anneal = config['is_anneal']
+
+    #for interplate
+    num = 64
+    index = [i for i in range(num)]
+    range_ = [(-25, 25) for i in range(num)]
+    n = 30
+
 
     # TODO: support uniform
     if config['z_dist'] != 'gauss':
@@ -32,11 +41,17 @@ def train(encoder, decoder, adversary, x_train, x_val, config):
     avb_train = AVB(encoder, decoder, adversary, x_train, z_sampled, config, beta=beta)
     avb_val = AVB(encoder, decoder, adversary, x_val, z_sampled, config, is_training=False)
 
+
+
     x_fake = get_decoder_mean(decoder(z_sampled, is_training=False), config)
 
     # Interpolations
     z1 = avb_val.z_real[:8]
     z2 = avb_val.z_real[8:16]
+    z_out = tf.placeholder(shape = [None, 64], dtype = tf.float32)
+
+    x_ints = get_decoder_mean(decoder(z_out), config)
+
     x_interp = get_decoder_mean(get_interpolations(decoder, z1, z2, 8, config), config)
 
     # Variables
@@ -108,6 +123,18 @@ def train(encoder, decoder, adversary, x_train, x_val, config):
                 save_images(interplations[:64], [8, 8], os.path.join(config['sample_dir'], 'interp'),
                             'interp_{:06d}.png'.format(niter)
                 )
+                #interplate
+
+                zout = sess.run(z1, feed_dict={x_val: samples0})
+                zout = zout[:1]
+                zints = myutil.multi_chane(zout, index = index, range_ = range_, n = n)
+                #print("fff"*23,zints.shape)
+
+                x_fake_ = sess.run(x_ints, feed_dict = {z_out: zints})
+
+                # plot(interp , n  ,index)
+                myutil.cvt_imgs(x_fake_, n, name = 'interp_img/{}.jpg'.format(niter))
+
 
 
 def get_train_op(loss_primal, loss_dual, vars_primal, vars_dual, config):
